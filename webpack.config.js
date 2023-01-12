@@ -16,11 +16,31 @@ module.exports = {
             {
                 test:/\.(sa|c|sc)ss$/i, //Expressão Regex
                 use:[
-                    'style-loader',
+                    'style-loader', //'style-loader' coloca os styles na DOM
+                    //MiniCssExtract.loader extrai o CSS em diferentes arquivos
                     MiniCssExtract.loader,
-                    'css-loader',
-                    'sass-loader'
+                    'css-loader',//translates CSS into CommonJS
+                    'sass-loader'//compiles Sass to CSS
                 ]
+            },
+            {
+                test:/\.js$/i,
+                exclude:/node_modules/,
+                use:{
+                    loader:'babel-loader',
+                    options:{
+                        presets:['@babel/preset-env'] 
+                    }
+                }
+            },
+            {
+                test:/\.(jpeg|jpg|png|gif|svg)$/i,
+                use:{
+                    loader:'file-loader',
+                    options:{
+                        name:'[name].[ext]'
+                    }
+                 }
             }
         ]
     },
